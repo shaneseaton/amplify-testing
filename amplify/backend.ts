@@ -9,9 +9,9 @@ const backend = defineBackend({
   storage
 });
 
-// backend.addOutput({
-//   storage: {
-//     aws_region: "ap-southeast-2",
-//     bucket_name: "sea066-test-amplify",    
-//   },
-// });
+backend.addOutput({
+  storage: {
+    aws_region: "ap-southeast-2",
+    bucket_name: "sea066-test-amplify",    
+  },
+});
