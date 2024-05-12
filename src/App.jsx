@@ -6,7 +6,7 @@ import { useCallback, useState } from 'react';
 
 
 async function App() {
-  var [items, setItems] = useState<any>([]);
+  var [items, setItems] = useState([]);
 
   useCallback(async () => {
     try {
