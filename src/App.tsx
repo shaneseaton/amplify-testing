@@ -1,4 +1,4 @@
-import { Button, Flex, Heading, Image, Text } from '@aws-amplify/ui-react';
+// import { Button, Flex, Heading, Image, Text } from '@aws-amplify/ui-react';
 import '@aws-amplify/ui-react/styles.css';
 import { Authenticator } from '@aws-amplify/ui-react';
 
