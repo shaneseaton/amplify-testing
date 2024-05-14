@@ -6,7 +6,7 @@ import { useEffect, useState } from 'react';
 
 
 function App() {
-  var [items, setItems] = useState<any>([]);
+  var [items, setItems] = useState<any[]>([]);
 
   useEffect(() => {
     (async function() {
