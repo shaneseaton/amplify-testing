@@ -2,22 +2,24 @@
 import '@aws-amplify/ui-react/styles.css';
 import { Authenticator } from '@aws-amplify/ui-react';
 import { list } from 'aws-amplify/storage';
-import { useCallback, useState } from 'react';
+import { useEffect, useState } from 'react';
 
 
-async function App() {
-  var [items, setItems] = useState([]);
+function App() {
+  var [items, setItems] = useState<any>([]);
 
-  useCallback(async () => {
-    try {
-      const result = await list({
-        path: '',
-        // Alternatively, path: ({identityId}) => `album/{identityId}/photos/`
-      });
-      setItems(result.items);
-    } catch (error) {
-      console.log(error);
-    }
+  useEffect(() => {
+    (async function() {
+      try {
+        const result = await list({
+          path: '',
+          // Alternatively, path: ({identityId}) => `album/{identityId}/photos/`
+        });
+        setItems(result.items);
+      } catch (error) {
+        console.log(error);
+      }  
+    }())
   }, [])
 
   return (
@@ -27,7 +29,7 @@ async function App() {
           <h1>Hello {user?.username}</h1>
           <button onClick={signOut}>Sign out</button>
           {items.map(x => (
-            <p>{x.path}</p>
+            <p>Farts: {x.path}</p>
           ))}
         </main>
       )}
