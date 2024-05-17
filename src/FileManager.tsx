@@ -1,16 +1,18 @@
 // import { Button, Flex, Heading, Image, Text } from '@aws-amplify/ui-react';
 import { fetchAuthSession } from '@aws-amplify/auth';
-import { Breadcrumbs, Flex, Link, Pagination, Table, TableBody, TableCell, TableHead, TableRow, View } from '@aws-amplify/ui-react';
+import { Accordion, Breadcrumbs, Button, Flex, Link, Pagination, Table, TableBody, TableCell, TableHead, TableRow, View } from '@aws-amplify/ui-react';
 import '@aws-amplify/ui-react/styles.css';
 import { ListObjectsV2Command, S3Client } from "@aws-sdk/client-s3";
 import { Amplify } from "aws-amplify";
 import { useEffect, useState } from 'react';
 import { BsFileEarmarkArrowDown, BsFolder } from "react-icons/bs";
+import { StorageManager } from '@aws-amplify/ui-react-storage';
 
 function FileManager() {
     var [files, setFiles] = useState<any[]>([]);
     var [dirs, setDirs] = useState<any[]>([]);
     var [folders, setFolders] = useState<string[]>(["shared"]);
+    var [triggerReload, setTriggerReload] = useState<number>(0);
     const prefix = `${folders.join("/")}/`
     const pageSize = 20;
 
@@ -55,10 +57,14 @@ function FileManager() {
                 console.log(error);
             }
         }())
-    }, [prefix])
+    }, [prefix, triggerReload])
 
     const onClickFolder = (dirname: string) => {
         setFolders([...folders, dirname.replace("/", "")]);
+    }
+
+    const refreshFiles = () => {
+        setTriggerReload(triggerReload + 1)
     }
 
     return (
@@ -66,22 +72,39 @@ function FileManager() {
             direction="column"
             justifyContent="flex-start"
             alignItems="stretch"
-            alignContent="flex-start"
             wrap="nowrap"
             gap="1rem"
         >
+            <Flex direction="row" gap="1rem" justifyContent="flex-end" alignItems="baseline">
+                <View flex="1 0 auto">
+                    <Breadcrumbs.Container>
+                        {folders.map((f, i, l) => (
+                            <Breadcrumbs.Item>
+                                <Breadcrumbs.Link onClick={() => setFolders(l.slice(0, i + 1))}>{f}</Breadcrumbs.Link>
+                                <Breadcrumbs.Separator />
+                            </Breadcrumbs.Item>
+                        ))}
+                    </Breadcrumbs.Container>
+                </View>
+            </Flex>
+            <Accordion.Container>
+                <Accordion.Item value="Accordion-item">
+                    <Accordion.Trigger>
+                        Uploader
+                        <Accordion.Icon />
+                    </Accordion.Trigger>
+                    <Accordion.Content>
+                        <StorageManager
+                            path={prefix}
+                            maxFileCount={1}
+                            isResumable
+                            onUploadSuccess={refreshFiles}
+                        />
+                    </Accordion.Content>
+                </Accordion.Item>
+            </Accordion.Container>
             <View>
-                <Breadcrumbs.Container>
-                    {folders.map((f, i, l) => (
-                        <Breadcrumbs.Item>
-                            <Breadcrumbs.Link onClick={() => setFolders(l.slice(0, i+1))}>{f}</Breadcrumbs.Link>
-                            <Breadcrumbs.Separator />
-                        </Breadcrumbs.Item>
-                    ))}
-                </Breadcrumbs.Container>
-            </View>
-            <View>
-                <Table caption="" highlightOnHover={false}>
+                <Table caption="" highlightOnHover={false} size="small">
                     <TableHead>
                         <TableRow>
                             <TableCell as="th">Name</TableCell>
@@ -120,6 +143,7 @@ function FileManager() {
             <View>
                 <Pagination currentPage={1} totalPages={10} siblingCount={1} />
             </View>
+
         </Flex>
     );
 }
