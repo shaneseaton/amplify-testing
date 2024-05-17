@@ -1,12 +1,12 @@
 // import { Button, Flex, Heading, Image, Text } from '@aws-amplify/ui-react';
 import { fetchAuthSession } from '@aws-amplify/auth';
-import { Accordion, Breadcrumbs, Button, Flex, Link, Pagination, Table, TableBody, TableCell, TableHead, TableRow, View } from '@aws-amplify/ui-react';
+import { Accordion, Breadcrumbs, Flex, Link, Pagination, Table, TableBody, TableCell, TableHead, TableRow, View } from '@aws-amplify/ui-react';
+import { StorageManager } from '@aws-amplify/ui-react-storage';
 import '@aws-amplify/ui-react/styles.css';
 import { ListObjectsV2Command, S3Client } from "@aws-sdk/client-s3";
 import { Amplify } from "aws-amplify";
 import { useEffect, useState } from 'react';
 import { BsFileEarmarkArrowDown, BsFolder } from "react-icons/bs";
-import { StorageManager } from '@aws-amplify/ui-react-storage';
 
 function FileManager() {
     var [files, setFiles] = useState<any[]>([]);

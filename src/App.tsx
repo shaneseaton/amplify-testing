@@ -1,5 +1,5 @@
 // import { Button, Flex, Heading, Image, Text } from '@aws-amplify/ui-react';
-import { AccountSettings, Authenticator, Button, Card, Flex, Heading, View } from '@aws-amplify/ui-react';
+import { Authenticator, Button, Card, Flex, Heading, View } from '@aws-amplify/ui-react';
 import '@aws-amplify/ui-react/styles.css';
 import FileManager from './FileManager';
 

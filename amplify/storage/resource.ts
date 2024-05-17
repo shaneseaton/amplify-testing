@@ -12,7 +12,7 @@ export const storage = defineStorage({
     ],
     "team2/*": [
       allow.groups(["ADMIN"]).to(["read", "write", "delete"]),
-      allow.groups(["TEAM2∂"]).to(["read", "write", "delete"]),
+      allow.groups(["TEAM2"]).to(["read", "write", "delete"]),
     ]
   })
 });
