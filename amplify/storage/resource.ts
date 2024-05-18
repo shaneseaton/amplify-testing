@@ -4,7 +4,7 @@ export const storage = defineStorage({
   name: 'seatontestingamplify',
   access: (allow) => ({
     "data/*": [ 
-      allow.authenticated.to(["read"])
+      allow.authenticated.to(["read", "write", "delete"])
     ],
     "data/shared/*": [ 
       allow.authenticated.to(["read", "write", "delete"])
