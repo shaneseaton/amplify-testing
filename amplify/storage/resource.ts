@@ -3,6 +3,9 @@ import { defineStorage } from '@aws-amplify/backend';
 export const storage = defineStorage({
   name: 'seatontestingamplify',
   access: (allow) => ({
+    "/*": [ 
+      allow.authenticated.to(["read"])
+    ],
     "shared/*": [ 
       allow.authenticated.to(["read", "write", "delete"])
     ],

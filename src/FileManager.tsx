@@ -11,7 +11,7 @@ import { BsFileEarmarkArrowDown, BsFolder } from "react-icons/bs";
 function FileManager() {
     var [files, setFiles] = useState<any[]>([]);
     var [dirs, setDirs] = useState<any[]>([]);
-    var [folders, setFolders] = useState<string[]>(["shared"]);
+    var [folders, setFolders] = useState<string[]>(["team2"]);
     var [triggerReload, setTriggerReload] = useState<number>(0);
     const prefix = `${folders.join("/")}/`
     const pageSize = 20;
