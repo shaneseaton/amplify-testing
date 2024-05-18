@@ -3,17 +3,17 @@ import { defineStorage } from '@aws-amplify/backend';
 export const storage = defineStorage({
   name: 'seatontestingamplify',
   access: (allow) => ({
-    "/*": [ 
+    "data/*": [ 
       allow.authenticated.to(["read"])
     ],
-    "shared/*": [ 
+    "data/shared/*": [ 
       allow.authenticated.to(["read", "write", "delete"])
     ],
-    "team1/*": [
+    "data/team1/*": [
       allow.groups(["ADMIN"]).to(["read", "write", "delete"]),
       allow.groups(["TEAM1"]).to(["read", "write", "delete"]),
     ],
-    "team2/*": [
+    "data/team2/*": [
       allow.groups(["ADMIN"]).to(["read", "write", "delete"]),
       allow.groups(["TEAM2"]).to(["read", "write", "delete"]),
     ]
