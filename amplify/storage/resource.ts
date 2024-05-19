@@ -6,9 +6,9 @@ export const storage = defineStorage({
     "data/*": [ 
       allow.authenticated.to(["read", "write", "delete"])
     ],
-    "data/shared/*": [ 
-      allow.authenticated.to(["read", "write", "delete"])
-    ],
+    // "data/shared/*": [ 
+    //   allow.authenticated.to(["read", "write", "delete"])
+    // ],
     // "data/team1/*": [
     //   allow.groups(["ADMIN"]).to(["read", "write", "delete"]),
     //   allow.groups(["TEAM1"]).to(["read", "write", "delete"]),
